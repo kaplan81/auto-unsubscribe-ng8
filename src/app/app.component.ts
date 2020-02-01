@@ -12,15 +12,10 @@ import { Breakpoint } from './breakpoint.enum';
 export class AppComponent {
   static mdMaxQuery = `(max-width: ${Breakpoint.MD - 1}px)`;
   @ViewChild(MatSidenav, { static: false }) sidenav: MatSidenav;
-  title = 'Auto Unsubscribe in Angular 8';
   mobileQuery$: Observable<BreakpointState> = this.breakpointObserver.observe(
     AppComponent.mdMaxQuery,
   );
+  title = 'Auto Unsubscribe Angular 8';
 
-  // TODO: replace with real links.
-  fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
-
-  constructor(private breakpointObserver: BreakpointObserver) {
-    console.log(this.fillerNav);
-  }
+  constructor(private breakpointObserver: BreakpointObserver) {}
 }
