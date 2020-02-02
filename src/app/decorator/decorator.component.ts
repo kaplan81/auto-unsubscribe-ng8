@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { interval, Observable, Subscription } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+import { ondestroy } from '../_app/decorators/ondestroy.decorator';
 
 @Component({
-  selector: 'app-decorator',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./decorator.component.scss'],
   templateUrl: './decorator.component.html',
-  styleUrls: ['./decorator.component.scss']
 })
-export class DecoratorComponent implements OnInit {
+export class DecoratorComponent implements OnInit, OnDestroy {
+  observable$: Observable<number> = interval(1000);
+  subscription$$: Subscription;
 
-  constructor() { }
-
-  ngOnInit() {
+  ngOnInit(): void {
+    this.subscription$$ = this.observable$
+      .pipe(tap(console.log), takeUntil((this as any).destroyed$))
+      .subscribe();
   }
 
+  @ondestroy()
+  ngOnDestroy(): void {}
 }
