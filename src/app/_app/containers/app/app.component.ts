@@ -1,5 +1,5 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Observable, Subject } from 'rxjs';
@@ -8,7 +8,6 @@ import { DialogComponent } from '../../components/dialog/dialog.component';
 import { Breakpoint } from '../../enums/breakpoint.enum';
 import { DevTools } from '../../models/devtools.model';
 import { DevToolsService } from '../../services/devtools.service';
-import { WINDOW } from '../../services/window.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +27,6 @@ export class AppComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private devToolsService: DevToolsService,
     public dialog: MatDialog,
-    @Inject(WINDOW) private window: any,
   ) {
     this.devToolsService.checkOnDevTools();
   }
