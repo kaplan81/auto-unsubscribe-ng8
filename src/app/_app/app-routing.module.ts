@@ -1,11 +1,33 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
-
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'home', loadChildren: () => import('../home/home.module').then(m => m.HomeModule) },
+  {
+    path: 'destroyed',
+    loadChildren: () => import('../destroyed/destroyed.module').then(m => m.DestroyedModule),
+  },
+  {
+    path: 'boilerplate',
+    loadChildren: () => import('../boilerplate/boilerplate.module').then(m => m.BoilerplateModule),
+  },
+  {
+    path: 'abstract',
+    loadChildren: () => import('../abstract/abstract.module').then(m => m.AbstractModule),
+  },
+  { path: 'mixin', loadChildren: () => import('../mixin/mixin.module').then(m => m.MixinModule) },
+  {
+    path: 'decorator',
+    loadChildren: () => import('../decorator/decorator.module').then(m => m.DecoratorModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
