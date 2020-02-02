@@ -20,5 +20,7 @@ export class BoilerplateComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroyed$.next();
+    // If you need to do something on destroy in the component class.
+    console.log('this.subscription$$.closed in ngOnDestroy::', this.subscription$$.closed);
   }
 }

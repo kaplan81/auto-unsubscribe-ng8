@@ -17,4 +17,12 @@ export class AbstractComponent extends SubscribedContainer implements OnInit {
       .pipe(tap(console.log), takeUntil(this.destroyed$))
       .subscribe();
   }
+
+  // // If you need to do something on destroy in the component class.
+  // // tslint:disable-next-line: use-lifecycle-interface
+  // ngOnDestroy(): void {
+  //   // tslint:disable-next-line: no-unused-expression no-string-literal
+  //   super['ngOnDestroy'] && super['ngOnDestroy']();
+  //   console.log('this.subscription$$.closed in ngOnDestroy::', this.subscription$$.closed);
+  // }
 }

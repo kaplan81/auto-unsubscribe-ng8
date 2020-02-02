@@ -19,5 +19,8 @@ export class DecoratorComponent implements OnInit, OnDestroy {
   }
 
   @ondestroy()
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    // If you need to do something on destroy in the component class.
+    console.log('this.subscription$$.closed in ngOnDestroy::', this.subscription$$.closed);
+  }
 }
