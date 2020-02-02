@@ -1,11 +1,10 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatModule } from '../_app/mat.module';
+import { SharedModule } from '../_shared/shared.module';
 import { DecoratorRoutingModule } from './decorator-routing.module';
 import { DecoratorComponent } from './decorator.component';
 
 @NgModule({
   declarations: [DecoratorComponent],
-  imports: [CommonModule, DecoratorRoutingModule, MatModule],
+  imports: [DecoratorRoutingModule, SharedModule],
 })
 export class DecoratorModule {}

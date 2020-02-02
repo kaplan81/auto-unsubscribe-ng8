@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatModule } from '../_app/mat.module';
+import { MatModule } from '../_shared/mat.module';
+import { SharedModule } from '../_shared/shared.module';
 import { MixinRoutingModule } from './mixin-routing.module';
 import { MixinComponent } from './mixin.component';
 
 @NgModule({
   declarations: [MixinComponent],
-  imports: [CommonModule, MixinRoutingModule, MatModule],
+  imports: [MixinRoutingModule, MatModule, SharedModule],
 })
 export class MixinModule {}

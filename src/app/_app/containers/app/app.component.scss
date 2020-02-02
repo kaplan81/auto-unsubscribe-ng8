@@ -25,6 +25,10 @@
     &.is-mobile {
       flex: 1 0 auto;
     }
+    mat-sidenav {
+      min-width: 180px;
+      color: #444;
+    }
     main {
       padding: 25px;
     }
