@@ -5,7 +5,6 @@ import { subscribedContainerMixin } from '../_app/mixins/subscribed-container.mi
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./mixin.component.scss'],
   templateUrl: './mixin.component.html',
 })
 export class MixinComponent extends subscribedContainerMixin() implements OnInit {
