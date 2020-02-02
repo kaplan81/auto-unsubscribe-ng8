@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { interval, Observable, Subject, Subscription } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-boilerplate',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./boilerplate.component.scss'],
   templateUrl: './boilerplate.component.html',
-  styleUrls: ['./boilerplate.component.scss']
 })
-export class BoilerplateComponent implements OnInit {
+export class BoilerplateComponent implements OnInit, OnDestroy {
+  destroyed$ = new Subject<void>();
+  observable$: Observable<number> = interval(1000);
+  subscription$$: Subscription;
 
-  constructor() { }
-
-  ngOnInit() {
+  ngOnInit(): void {
+    this.subscription$$ = this.observable$
+      .pipe(tap(console.log), takeUntil(this.destroyed$))
+      .subscribe();
   }
 
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+  }
 }
