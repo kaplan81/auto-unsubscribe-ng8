@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { interval, Observable, Subscription } from 'rxjs';
 import { takeUntil, tap } from 'rxjs/operators';
 import { SubscribedContainer } from '../_app/abstracts/subscribed-container.abstract';
 
 @Component({
-  selector: 'app-abstract',
-  templateUrl: './abstract.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./abstract.component.scss'],
+  templateUrl: './abstract.component.html',
 })
 export class AbstractComponent extends SubscribedContainer implements OnInit {
   observable$: Observable<number> = interval(1000);
