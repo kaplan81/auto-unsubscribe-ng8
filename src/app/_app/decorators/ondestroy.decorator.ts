@@ -21,8 +21,6 @@ export function ondestroy(): MethodDecorator {
       enumerable: true,
       configurable: true,
     });
-
-    // We need to store the oririnal `ngOnDestroy`.
     const originalDescriptor = descriptor.value;
 
     // This cannot be an arrow function
@@ -30,15 +28,7 @@ export function ondestroy(): MethodDecorator {
     descriptor.value = function() {
       target[destroyed$].next();
       /**
-       * Do not do this -> target[destroyed$].complete();
-       * It is not necessary:
-       * https://stackoverflow.com/questions/44289859/do-i-need-to-complete-a-subject-for-it-to-be-garbage-collected
-       * Also it will make trouble on entry components
-       * called by the Angular router since it re-uses
-       * the same instance of the component and subjects are not reusable:
-       * https://angular.io/guide/router#observable-parammap-and-component-reuse
-       * https://medium.com/@benlesh/on-the-subject-of-subjects-in-rxjs-2b08b7198b93#dc02
-       * And normally you would pass the method arguments to the function:
+       * Normally you would pass the method arguments to the function:
        * ```ts
        * original.apply(this, arguments);
        * ```
