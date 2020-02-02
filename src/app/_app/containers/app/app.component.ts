@@ -1,13 +1,14 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
-import { EventManager } from '@angular/platform-browser';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Breakpoint } from './breakpoint.enum';
-import { DevToolsChange } from './devtools.model';
-import { DevToolsService } from './devtools.service';
-import { WINDOW } from './window.service';
+import { take, tap } from 'rxjs/operators';
+import { DialogComponent } from '../../components/dialog/dialog.component';
+import { Breakpoint } from '../../enums/breakpoint.enum';
+import { DevTools } from '../../models/devtools.model';
+import { DevToolsService } from '../../services/devtools.service';
+import { WINDOW } from '../../services/window.service';
 
 @Component({
   selector: 'app-root',
@@ -26,19 +27,26 @@ export class AppComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private devToolsService: DevToolsService,
-    private eventManager: EventManager,
+    public dialog: MatDialog,
     @Inject(WINDOW) private window: any,
   ) {
-    this.devToolsService.checkOnDevTools$.pipe(takeUntil(this.devtoolsChecked$)).subscribe();
+    this.devToolsService.checkOnDevTools();
   }
 
   ngOnInit(): void {
-    this.eventManager.addGlobalEventListener('window', 'devtoolschange', (e: DevToolsChange) => {
-      const isOpen: boolean = e.detail.isOpen;
-      if (isOpen === true) {
-        this.devtoolsChecked$.next();
-        console.log('console is open');
-      }
-    });
+    this.devToolsService.devTools$
+      .pipe(
+        take(1),
+        tap((dev: DevTools) => {
+          if (!dev.isOpen) {
+            this.openDialog();
+          }
+        }),
+      )
+      .subscribe();
+  }
+
+  openDialog(): void {
+    this.dialog.open(DialogComponent);
   }
 }

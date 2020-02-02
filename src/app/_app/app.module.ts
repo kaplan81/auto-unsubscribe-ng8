@@ -3,14 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AbstractModule } from '../abstract/abstract.module';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { AppComponent } from './containers/app/app.component';
 import { MatModule } from './mat.module';
-import { WINDOW_PROVIDERS } from './window.service';
+import { WINDOW_PROVIDERS } from './services/window.service';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatModule, AbstractModule],
   bootstrap: [AppComponent],
+  declarations: [AppComponent, DialogComponent],
+  entryComponents: [DialogComponent],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MatModule, AbstractModule],
   providers: [WINDOW_PROVIDERS],
 })
 export class AppModule {}
