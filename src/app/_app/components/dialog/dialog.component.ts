@@ -1,15 +1,15 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent {
+  constructor(private dialogRef: MatDialogRef<DialogComponent>) {}
 
-  constructor() { }
-
-  ngOnInit() {
+  closeDialog(): void {
+    this.dialogRef.close();
   }
-
 }
