@@ -1,3 +1,6 @@
+<img src="src/assets/auto-unsubscribe-ng8-01.png">
+
+
 # AutoUnsubscribeNg8
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.24.
