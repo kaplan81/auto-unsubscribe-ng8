@@ -55,3 +55,29 @@ export class BoilerplateComponent implements OnInit, OnDestroy {
   }
 }
 ```
+
+## How to remove the boilerplate
+
+Our goal is removing these 3 things from any component class of our project:
+
+* `destroyed$ = new Subject<void>();`
+* `this.destroyed$.next();`
+* `ngOnDestroy(): void {}`
+
+In order to do that we can follow 3 different strategies.
+
+* Abstract class
+* Mixin class
+* Method decorator
+
+You can find a detailed description of those in Angular 8 [this article](https://medium.com/@gesteira2046/goodbye-to-unsubscribe-in-angular-components-8817e1b21db2).
+
+All of them are implemented for you in the current project.
+
+## How to test
+
+You can click on the different navigation links located at the sidenav. On each one of them Freezer will destroy the corresponding component when clicking on PUSH TO DESTROY.
+
+If you see the counter stopped it means that the observable was properly unsubscribed on destroy.
+
+If you see the `this.subscription$$.closed` log it means that the strategy was not capable of removing the `ngOnDestroy(): void {}` boilerplate.
