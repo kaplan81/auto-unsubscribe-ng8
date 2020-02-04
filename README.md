@@ -15,3 +15,9 @@ Navigate to `http://localhost:4200/`. The app will automatically reload if you c
 Once you load the app in your browser you should see something like this:
 
 <img src="src/assets/auto-unsubscribe-ng8-01.png">
+
+There is a service implemented that checks whether DevTools is open or not. You need it open in order to test the destruction and consequent unsubscription of components that were previously subscribed to observables.
+
+Click on OK and open DevTools console. Now you should see the emission of a counter every second:
+
+<img src="src/assets/auto-unsubscribe-ng8-02.png">
