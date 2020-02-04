@@ -21,3 +21,7 @@ There is a service implemented that checks whether DevTools is open or not. You 
 Click on OK and open DevTools console. Now you should see the emission of a counter every second:
 
 <img src="src/assets/auto-unsubscribe-ng8-02.png">
+
+If you click on PUSH TO DESTROY Freezer will take care of destroying the current component by navigating to a `DestroyedComponent`.
+
+<img src="src/assets/auto-unsubscribe-ng8-03.png">
