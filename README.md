@@ -81,3 +81,19 @@ You can click on the different navigation links located at the sidenav. On each 
 If you see the counter stopped it means that the observable was properly unsubscribed on destroy.
 
 If you see the `this.subscription$$.closed` log it means that the strategy was not capable of removing the `ngOnDestroy(): void {}` boilerplate.
+
+All the strategies seem to work, right? Well...
+
+```bash
+npm run serve:aot
+```
+
+Now you are running the app on AOT compilation. See what happens when trying to use the MIXIN strategy. The observable does not get unsubscribed! So it does not work in Angular 8 with AOT compilation. However, it does work in Angular 9 so it is fine if you are just not using Angular 8.
+
+## See about Angular 9
+
+Do you want to see what happens on an Angular 9 app?
+
+Check [this repo](https://github.com/kaplan81/auto-unsubscribe-ng9) for that.
+
+Happy coding!
