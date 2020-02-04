@@ -13,4 +13,5 @@ Navigate to `http://localhost:4200/`. The app will automatically reload if you c
 ## Freezer, the destroyer of components
 
 Once you load the app in your browser you should see something like this:
+
 <img src="src/assets/auto-unsubscribe-ng8-01.png">
