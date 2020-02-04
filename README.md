@@ -25,3 +25,7 @@ Click on OK and open DevTools console. Now you should see the emission of a coun
 If you click on PUSH TO DESTROY Freezer will take care of destroying the current component by navigating to a `DestroyedComponent`.
 
 <img src="src/assets/auto-unsubscribe-ng8-03.png">
+
+As you can see the count stops. That means that our observable was unsubscribed. Also `this.subscription$$.closed` outputs `true`. That means that we included an extra action to check on the `subscription$$` inside the `ngOnDestroy()` method.
+
+<img src="src/assets/auto-unsubscribe-ng8-04.png">
