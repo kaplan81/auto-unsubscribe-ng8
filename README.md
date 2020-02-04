@@ -28,4 +28,30 @@ If you click on PUSH TO DESTROY Freezer will take care of destroying the current
 
 As you can see the count stops. That means that our observable was unsubscribed. Also `this.subscription$$.closed` outputs `true`. That means that we included an extra action to check on the `subscription$$` inside the `ngOnDestroy()` method.
 
-<img src="src/assets/auto-unsubscribe-ng8-04.png">
+```ts
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { interval, Observable, Subject, Subscription } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+
+@Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './boilerplate.component.html',
+})
+export class BoilerplateComponent implements OnInit, OnDestroy {
+  destroyed$ = new Subject<void>();
+  observable$: Observable<number> = interval(1000);
+  subscription$$: Subscription;
+
+  ngOnInit(): void {
+    this.subscription$$ = this.observable$
+      .pipe(tap(console.log), takeUntil(this.destroyed$))
+      .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    // Any extra actions:
+    console.log('this.subscription$$.closed in ngOnDestroy:::', this.subscription$$.closed);
+  }
+}
+```
